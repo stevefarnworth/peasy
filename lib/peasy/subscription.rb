@@ -38,7 +38,7 @@ module Peasy
       request = Net::HTTP::Patch.new(uri.request_uri)
       request['Content-Type'] = 'application/vnd.api+json'
       request['Accept'] = 'application/vnd.api+json'
-      request['Authorization'] = "Bearer #{Peasy.configuration.key}"
+      request['Authorization'] = "Bearer #{key}"
       request.body = {data: {type: "subscriptions", id: "#{id}", attributes: {cancelled: true}}}.to_json
       
       response = http.request(request)
