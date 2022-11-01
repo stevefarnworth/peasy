@@ -8,7 +8,7 @@ module Peasy
     def self.find(id)
       require 'net/http'
 
-      uri = URI.parse("https://api.lemonsqueezy.com/v1/subscriptions/#{id}")
+      uri = URI.parse("https://api.lemonsqueezy.com/v1/subscriptions/#{id}?include=order")
       
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.instance_of? URI::HTTPS
@@ -27,6 +27,10 @@ module Peasy
       self.find(id)['data']['attributes']['urls']['update_payment_method']
     end
 
+    def self.renewal_date(id)
+      self.find(id)['data']['attributes']['renews_at']
+    end    
+
     def self.cancel(id)
       require 'net/http'
 
@@ -38,7 +42,7 @@ module Peasy
       request = Net::HTTP::Patch.new(uri.request_uri)
       request['Content-Type'] = 'application/vnd.api+json'
       request['Accept'] = 'application/vnd.api+json'
-      request['Authorization'] = "Bearer #{key}"
+      request['Authorization'] = "Bearer #{Peasy.configuration.key}"
       request.body = {data: {type: "subscriptions", id: "#{id}", attributes: {cancelled: true}}}.to_json
       
       response = http.request(request)
