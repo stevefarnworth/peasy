@@ -1,8 +1,8 @@
 # Peasy
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/peasy`. To experiment with that code, run `bin/console` for an interactive prompt.
+An Easy Peasy way to use LemonSqueezy.
 
-TODO: Delete this and the text above, and describe your gem
+This gem lets you use the LemonSqueezy API to manage subscriptions from your application.
 
 ## Installation
 
@@ -22,17 +22,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This is super basic, and there are currently no tests. Probably don't use in production unless you know what the code does.
 
-## Development
+### Get Subscription
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+If you know the subscription ID from LemonSqueezy (likely you've saved it already to your application's database), you can query the API to get the response.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```
+Peasy::Subscription.find(API_KEY, SUBSCRIPTION_ID)
+```
 
-## Contributing
+### Cancel Subscription
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/peasy.
+As above, if you know the subscription ID from LemonSqueezy, you can instruct the API to cancel the relevant subscription.
+
+```
+Peasy::Subscription.cancel(API_KEY, SUBSCRIPTION_ID)
+```
+
+## To Do
+
+There's a lot of endpoints left to map here, and there's also going to be some refactoring to do and tests to write
 
 ## License
 
