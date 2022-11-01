@@ -15,6 +15,7 @@ module Peasy
       
       response = http.request(request)
       response = JSON.parse(response.body)
+
   
     end
 
@@ -34,7 +35,7 @@ module Peasy
       
       response = http.request(request)
       response = JSON.parse(response.body)
-      
+
     end
   end
 end
