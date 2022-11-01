@@ -25,6 +25,15 @@ Or install it yourself as:
 
 This is super basic, and there are currently no tests. Probably don't use in production unless you know what the code does.
 
+### Create Initializer
+Add a `peasy.rb` file to your initializers folder, defining your API key. The LemonSqueezy API keys don't always play nice with Rails credentials, so you might need to split if over several lines in your credentials and then gsub the linebreaks.
+
+```
+Peasy.configure do |config|
+  config.key = Rails.application.credentials.lemonsqueezy_api_key
+end
+```
+
 ### Get Subscription
 
 If you know the subscription ID from LemonSqueezy (likely you've saved it already to your application's database), you can query the API to get the response.
