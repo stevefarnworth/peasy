@@ -1,4 +1,5 @@
 # Peasy
+[![Gem Version](https://badge.fury.io/rb/peasy.svg)](https://badge.fury.io/rb/peasy)
 
 An Easy Peasy way to use LemonSqueezy.
 

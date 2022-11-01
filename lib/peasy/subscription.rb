@@ -1,6 +1,11 @@
 module Peasy
+
+  class Configuration
+    attr_accessor :key
+  end
+
   class Subscription
-    def self.find(key, id)
+    def self.find(id)
       require 'net/http'
 
       uri = URI.parse("https://api.lemonsqueezy.com/v1/subscriptions/#{id}")
@@ -11,15 +16,18 @@ module Peasy
       request = Net::HTTP::Get.new(uri.request_uri)
       request['Content-Type'] = 'application/vnd.api+json'
       request['Accept'] = 'application/vnd.api+json'
-      request['Authorization'] = "Bearer #{key}"
+      request['Authorization'] = "Bearer #{Peasy.configuration.key}"
       
       response = http.request(request)
       response = JSON.parse(response.body)
-
   
     end
 
-    def self.cancel(key, id)
+    def self.change_payment_method(id)
+      self.find(id)['data']['attributes']['urls']['update_payment_method']
+    end
+
+    def self.cancel(id)
       require 'net/http'
 
       uri = URI.parse("https://api.lemonsqueezy.com/v1/subscriptions/#{id}")
@@ -30,7 +38,7 @@ module Peasy
       request = Net::HTTP::Patch.new(uri.request_uri)
       request['Content-Type'] = 'application/vnd.api+json'
       request['Accept'] = 'application/vnd.api+json'
-      request['Authorization'] = "Bearer #{key}"
+      request['Authorization'] = "Bearer #{Peasy.configuration.key}"
       request.body = {data: {type: "subscriptions", id: "#{id}", attributes: {cancelled: true}}}.to_json
       
       response = http.request(request)
