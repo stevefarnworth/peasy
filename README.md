@@ -39,7 +39,7 @@ end
 If you know the subscription ID from LemonSqueezy (likely you've saved it already to your application's database), you can query the API to get the response.
 
 ```
-Peasy::Subscription.find(API_KEY, SUBSCRIPTION_ID)
+Peasy::Subscription.find(SUBSCRIPTION_ID)
 ```
 
 ### Cancel Subscription
@@ -47,7 +47,7 @@ Peasy::Subscription.find(API_KEY, SUBSCRIPTION_ID)
 As above, if you know the subscription ID from LemonSqueezy, you can instruct the API to cancel the relevant subscription.
 
 ```
-Peasy::Subscription.cancel(API_KEY, SUBSCRIPTION_ID)
+Peasy::Subscription.cancel(SUBSCRIPTION_ID)
 ```
 
 ## To Do
